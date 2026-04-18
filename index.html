@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Beranda | LembagaKita</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ======================= POPUP PENDAFTARAN ======================= -->
+<div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100000; align-items: center; justify-content: center;">
+    <div style="background: white; width: 500px; max-width: 90%; padding: 25px; border-radius: 20px; text-align: center; position: relative;">
+        <button onclick="closePopup()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 28px; cursor: pointer; color: #999;">&times;</button>
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=500" alt="Poster Pendaftaran" style="width: 100%; border-radius: 12px; margin-bottom: 15px;">
+        <h3 style="color: #0d6efd; margin-bottom: 10px;">🚀 Pendaftaran Program Pemrograman Web</h3>
+        <p style="margin-bottom: 15px;">Bergabunglah dalam program pelatihan pemrograman web terbaik! Kuasai HTML, CSS, JavaScript, dan framework modern.</p>
+        <div style="background: #f0f7ff; padding: 12px; border-radius: 12px; margin-bottom: 20px;">
+            <p style="margin: 5px 0;">✅ 100% Praktik Langsung</p>
+            <p style="margin: 5px 0;">✅ Sertifikat Resmi</p>
+            <p style="margin: 5px 0;">✅ Bimbingan Mentor Ahli</p>
+        </div>
+        <button onclick="window.location.href='pendaftaran.html'" style="background: linear-gradient(135deg, #0d6efd, #0a58ca); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer;">Daftar Sekarang →</button>
+    </div>
+</div>
+
+<script>
+    // Popup functions
+    function showPopup() {
+        document.getElementById("popupOverlay").style.display = "flex";
+    }
+    function closePopup() {
+        document.getElementById("popupOverlay").style.display = "none";
+    }
+    
+    // Popup muncul 1.5 detik setelah halaman dimuat (hanya sekali)
+    window.addEventListener("load", function() {
+        if (!localStorage.getItem("popupShown")) {
+            setTimeout(showPopup, 1500);
+            localStorage.setItem("popupShown", "true");
+        }
+    });
+    
+    
+    // Tutup popup jika klik di luar area popup
+    document.getElementById("popupOverlay").onclick = function(e) {
+        if (e.target === this) closePopup();
+    };
+</script>
+
+
+<!-- LOADING SCREEN -->
+<div class="loader-wrapper" id="loaderWrapper">
+    <div class="loader"></div>
+    <div class="loading-text">Memuat Website...</div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-2 sticky-top">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand" href="index.html">
+            <span class="brand-icon"><i class="bi bi-building"></i></span> 
+            <span id="institutionName">LembagaKita</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi bi-house-door"></i> <span id="menuHome">Beranda</span></a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-badge"></i> <span id="menuProfile">Profil</span></a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a class="dropdown-item" href="pengembang.html"><i class="bi bi-person-circle"></i> <span id="menuPengembang">Profil Pengembang</span></a></li>
+                        <li><a class="dropdown-item" href="sejarah.html"><i class="bi bi-clock-history"></i> <span id="menuHistory">Sejarah Lembaga</span></a></li>
+                        <li><a class="dropdown-item" href="visi-misi.html"><i class="bi bi-eye"></i> <span id="menuVision">Visi & Misi</span></a></li>
+                        <li><a class="dropdown-item" href="struktur.html"><i class="bi bi-diagram-3"></i> <span id="menuStructure">Struktur Organisasi</span></a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="customer-service.html"><i class="bi bi-headset"></i> <span id="menuCs">Customer Service</span></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle"></i> <span id="menuAbout">Tentang Kami</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="pendaftaran.html"><i class="bi bi-pencil-square"></i> <span id="menuPendaftaran">Pendaftaran</span></a></li>
+                <li class="nav-item" id="adminNavItem" style="display: none;"><a class="nav-link" href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> <span id="adminText">Dashboard</span></a></li>
+                <li class="nav-item" id="loginNavItem"><a class="nav-link" href="login.html"><i class="bi bi-box-arrow-in-right"></i> <span id="loginText">Login</span></a></li>
+                <li class="nav-item" id="adminBadgeItem" style="display: none;"><span class="nav-link admin-badge-link"><span class="admin-badge"><i class="bi bi-person-circle"></i> <span id="adminNameText">Admin</span></span></span></li>
+                <li class="nav-item" id="logoutNavItem" style="display: none;"><a class="nav-link logout-btn" href="#" id="navLogoutLink"><i class="bi bi-box-arrow-right"></i> <span id="logoutText">Logout</span></a></li>
+                <li class="nav-item"><div class="language-selector"><span class="lang-option" id="langId">🇮🇩 ID</span><span class="lang-option" id="langEn">🇬🇧 EN</span></div></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SLIDESHOW SECTION -->
+<section class="hero-slideshow-section">
+    <div class="hero-slideshow-container">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600');">
+            <div class="hero-slide-content">
+                <h1 class="welcome-title" id="welcomeTitle">Selamat Datang di Web Lembaga</h1>
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <input type="text" id="globalSearchInput" class="search-input" placeholder="Cari berita, informasi...">
+                        <button id="globalSearchBtn" class="search-btn"><i class="bi bi-search"></i> <span>Cari</span></button>
+                    </div>
+                    <div id="searchResultInfo" class="mt-3 text-start"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1600');">
+            <div class="hero-slide-content">
+                <h1 class="welcome-title">Program Pelatihan Unggulan</h1>
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <input type="text" id="globalSearchInput2" class="search-input" placeholder="Cari program pelatihan...">
+                        <button id="globalSearchBtn2" class="search-btn"><i class="bi bi-search"></i> <span>Cari</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1600');">
+            <div class="hero-slide-content">
+                <h1 class="welcome-title">Beasiswa 2025</h1>
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <input type="text" id="globalSearchInput3" class="search-input" placeholder="Cari info beasiswa...">
+                        <button id="globalSearchBtn3" class="search-btn"><i class="bi bi-search"></i> <span>Cari</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="hero-slide-prev" id="heroSlidePrev"><i class="bi bi-chevron-left"></i></button>
+        <button class="hero-slide-next" id="heroSlideNext"><i class="bi bi-chevron-right"></i></button>
+        <div class="hero-slide-dots" id="heroSlideDots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED CONTENT -->
+<section class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="section-title-no-line">📌 Konten Unggulan</h2>
+        <p class="text-muted">Informasi dan kegiatan terbaru dari LembagaKita</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+            <div class="featured-card" onclick="window.location.href='about.html'">
+                <div class="featured-image"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600" alt="Program Unggulan"><span class="featured-badge">Program</span></div>
+                <div class="featured-body"><h4>Program Unggulan 2025</h4><p>Ikuti program pelatihan terbaik kami dengan kurikulum terkini.</p><div class="featured-meta"><span><i class="bi bi-calendar3"></i> Jan - Des 2025</span><span><i class="bi bi-people"></i> 500+ Peserta</span></div><a href="about.html" class="btn btn-sm btn-outline-primary mt-2">Selengkapnya →</a></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="featured-card" onclick="window.location.href='customer-service.html'">
+                <div class="featured-image"><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600" alt="Layanan Baru"><span class="featured-badge">Layanan</span></div>
+                <div class="featured-body"><h4>Layanan Konsultasi Online</h4><p>Konsultasi dengan ahli kami secara online. Jadwalkan sekarang!</p><div class="featured-meta"><span><i class="bi bi-clock"></i> 24/7 Available</span><span><i class="bi bi-chat-dots"></i> Live Chat</span></div><a href="customer-service.html" class="btn btn-sm btn-outline-primary mt-2">Selengkapnya →</a></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="featured-card" onclick="window.location.href='sejarah.html'">
+                <div class="featured-image"><img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600" alt="Sejarah"><span class="featured-badge">Info</span></div>
+                <div class="featured-body"><h4>5 Tahun LembagaKita</h4><p>Rayakan 5 tahun perjalanan LembagaKita dalam melayani pendidikan.</p><div class="featured-meta"><span><i class="bi bi-gift"></i> Diskon 50%</span><span><i class="bi bi-star"></i> Anniversary</span></div><a href="sejarah.html" class="btn btn-sm btn-outline-primary mt-2">Selengkapnya →</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="section-title">📸 Galeri Kegiatan</h2>
+        <p class="text-muted">Dokumentasi kegiatan dan acara LembagaKita</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-4 col-lg-3">
+            <div class="gallery-item" data-image="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800" data-title="Pelatihan Web Development" data-desc="Batch 5 - 2025. Peserta belajar membuat website dari nol menggunakan HTML, CSS, dan JavaScript." data-info="50+ Peserta | 10-15 Jan 2025">
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400" alt="Kegiatan 1">
+                <div class="gallery-overlay"><h5>Pelatihan Web Development</h5><p>Batch 5 - 2025</p><small><i class="bi bi-people"></i> 50+ Peserta</small></div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="gallery-item" data-image="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800" data-title="Webinar Nasional" data-desc="Transformasi Digital 2024 dengan 1000+ peserta dari seluruh Indonesia. Menghadirkan pembicara dari Google Indonesia." data-info="1000+ Peserta | 15 Januari 2024">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400" alt="Kegiatan 2">
+                <div class="gallery-overlay"><h5>Webinar Nasional</h5><p>Transformasi Digital 2024</p><small><i class="bi bi-calendar"></i> 15 Januari 2024</small></div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="gallery-item" data-image="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800" data-title="Studi Banding Internasional" data-desc="Kerjasama dengan universitas di Korea Selatan untuk program pertukaran pelajar dan penelitian bersama." data-info="30+ Peserta | 5 Universitas">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400" alt="Kegiatan 3">
+                <div class="gallery-overlay"><h5>Studi Banding</h5><p>Kerjasama Internasional</p><small><i class="bi bi-globe"></i> 30+ Peserta</small></div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="gallery-item" data-image="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800" data-title="Graduation Day" data-desc="Wisuda angkatan ke-10 dengan 200 lulusan baru. Acara dihadiri oleh orang tua dan mitra industri." data-info="200 Lulusan | 20 Desember 2024">
+                <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400" alt="Kegiatan 4">
+                <div class="gallery-overlay"><h5>Graduation Day</h5><p>Wisuda Angkatan ke-10</p><small><i class="bi bi-trophy"></i> 200 Lulusan</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL PREVIEW GAMBAR -->
+<div class="image-modal" id="imageModal">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-container">
+        <img id="modalImage" src="">
+        <div class="modal-caption" id="modalCaption">
+            <h4 id="modalTitle"></h4>
+            <p id="modalDesc"></p>
+            <small id="modalInfo"></small>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<section class="container my-5 fadeInUp">
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600" alt="Tentang LembagaKita" class="img-fluid rounded-4 shadow-lg" style="width: 100%;"></div>
+        <div class="col-md-6"><h2 class="section-title mb-4">Tentang LembagaKita</h2><p class="lead text-primary fw-bold">Semangat Proklamator dalam Setiap Pelayanan</p><p>LembagaKita adalah platform resmi yang didirikan pada tahun 2020 untuk memberikan akses informasi, layanan pendidikan, pelatihan profesional, serta konsultasi kelembagaan.</p><div class="row mt-4"><div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success fs-4"></i><div><h5 class="mb-0">Terakreditasi A</h5><small class="text-muted">Kemendikbudristek</small></div></div></div><div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-trophy-fill text-warning fs-4"></i><div><h5 class="mb-0">10+ Penghargaan</h5><small class="text-muted">Nasional & Internasional</small></div></div></div></div><a href="about.html" class="btn btn-primary rounded-pill px-4 mt-4"><i class="bi bi-arrow-right"></i> Selengkapnya</a></div>
+    </div>
+</section>
+
+<!-- FILTER KATEGORI BERITA -->
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                <button type="button" class="btn btn-outline-primary filter-btn active" id="filter-semua" onclick="filterByCategory('semua')">Semua</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" id="filter-Berita" onclick="filterByCategory('Berita')">📰 Berita</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" id="filter-Pengumuman" onclick="filterByCategory('Pengumuman')">📢 Pengumuman</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" id="filter-Acara" onclick="filterByCategory('Acara')">🎉 Acara</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" id="filter-Prestasi" onclick="filterByCategory('Prestasi')">🏆 Prestasi</button>
+                <button type="button" class="btn btn-outline-primary filter-btn" id="filter-Lowongan" onclick="filterByCategory('Lowongan')">💼 Lowongan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BERITA SECTION -->
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title">📰 Berita Terbaru</h2>
+        <span class="badge bg-primary" id="newsCount">0 Berita</span>
+    </div>
+    <div id="newsContainer" class="row g-4"></div>
+    <div class="text-center mt-4" id="loadMoreContainer">
+        <button id="loadMoreBtn" class="btn btn-outline-primary rounded-pill px-4"><i class="bi bi-arrow-down"></i> Muat Lebih Banyak</button>
+    </div>
+    <div id="noMoreNews" class="text-center my-4" style="display: none;">
+        <p class="text-muted"><i class="bi bi-inbox"></i> Tidak ada berita lagi</p>
+    </div>
+</div>
+
+<!-- STATS SECTION -->
+<section class="container my-5">
+    <div class="row g-4 text-center">
+        <div class="col-md-3 col-6"><div class="stat-card"><i class="bi bi-newspaper fs-1 text-primary"></i><h3 id="totalNewsStat">0</h3><p>Total Berita</p></div></div>
+        <div class="col-md-3 col-6"><div class="stat-card"><i class="bi bi-people fs-1 text-primary"></i><h3>10,000+</h3><p>Alumni</p></div></div>
+        <div class="col-md-3 col-6"><div class="stat-card"><i class="bi bi-building fs-1 text-primary"></i><h3>500+</h3><p>Program Kerja</p></div></div>
+        <div class="col-md-3 col-6"><div class="stat-card"><i class="bi bi-star-fill fs-1 text-warning"></i><h3>4.9</h3><p>Rating</p></div></div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-new">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0"><div class="footer-logo"><i class="bi bi-building fs-2"></i><h4>LembagaKita</h4></div><p class="footer-description text-muted mt-2">Melayani dengan semangat proklamator untuk pendidikan Indonesia yang lebih baik.</p></div>
+            <div class="col-md-4 mb-4 mb-md-0"><h5><i class="bi bi-link-45deg"></i> Tautan Cepat</h5><ul class="footer-links"><li><a href="index.html">Beranda</a></li><li><a href="sejarah.html">Sejarah Lembaga</a></li><li><a href="pengembang.html">Profil Pengembang</a></li><li><a href="visi-misi.html">Visi & Misi</a></li><li><a href="struktur.html">Struktur Organisasi</a></li><li><a href="customer-service.html">Customer Service</a></li><li><a href="about.html">Tentang Kami</a></li><li><a href="pendaftaran.html">Pendaftaran</a></li></ul></div>
+            <div class="col-md-4"><h5><i class="bi bi-share-fill"></i> Ikuti Kami</h5><div class="social-icons"><a href="#" class="social-icon"><i class="bi bi-facebook"></i></a><a href="#" class="social-icon"><i class="bi bi-instagram"></i></a><a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a><a href="#" class="social-icon"><i class="bi bi-youtube"></i></a><a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a><a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a></div><div class="mt-3"><h5><i class="bi bi-download"></i> Unduh Aplikasi</h5><div class="app-buttons"><a href="#" class="app-btn"><i class="bi bi-google-play"></i> Google Play</a><a href="#" class="app-btn"><i class="bi bi-apple"></i> App Store</a></div></div></div>
+        </div>
+        <hr class="my-4">
+        <div class="text-center"><p class="mb-0">&copy; 2025 LembagaKita. All rights reserved. | <span id="footerEmail">Layanan 24 Jam: help@lembagakita.id</span> | <span id="footerPhone">(021) 1234-5678</span></p></div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="js/language.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/news.js"></script>
+<script src="js/live-chat.js"></script>
+<script src="js/music-player.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        // ======================= SLIDESHOW =======================
+        let currentSlide = 0;
+        const slides = $(".hero-slide");
+        const dots = $(".hero-slide-dots .dot");
+        const totalSlides = slides.length;
+        
+        function showSlide(index) {
+            slides.removeClass("active");
+            dots.removeClass("active");
+            $(slides[index]).addClass("active");
+            $(dots[index]).addClass("active");
+            currentSlide = index;
+        }
+        
+        function nextSlide() {
+            let next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+        
+        function prevSlide() {
+            let prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(prev);
+        }
+        
+        $("#heroSlideNext").on("click", nextSlide);
+        $("#heroSlidePrev").on("click", prevSlide);
+        
+        dots.each(function(idx) {
+            $(this).on("click", function() { showSlide(idx); });
+        });
+        
+        let slideInterval = setInterval(nextSlide, 5000);
+        $(".hero-slideshow-container").hover(
+            function() { clearInterval(slideInterval); },
+            function() { slideInterval = setInterval(nextSlide, 5000); }
+        );
+        
+        // ======================= SEARCH (Redirect ke halaman pencarian) =======================
+$("#globalSearchBtn, #globalSearchBtn2, #globalSearchBtn3").on("click", function() {
+    let query = $(this).closest(".search-wrapper").find(".search-input").val().trim();
+    if (query === "") {
+        // Jika tidak ada kata kunci, tetap buka halaman pencarian (tanpa query)
+        window.location.href = "search.html";
+    } else {
+        window.location.href = "search.html?q=" + encodeURIComponent(query);
+    }
+});
+
+$(".search-input").on("keypress", function(e) {
+    if (e.which === 13) {
+        e.preventDefault();
+        $(this).closest(".search-wrapper").find(".search-btn").click();
+    }
+});
+        
+        // ======================= GALLERY =======================
+        $(".gallery-item").on("click", function() {
+            var imgSrc = $(this).data("image");
+            var title = $(this).data("title");
+            var desc = $(this).data("desc");
+            var info = $(this).data("info");
+            $("#modalImage").attr("src", imgSrc);
+            $("#modalTitle").text(title);
+            $("#modalDesc").text(desc);
+            $("#modalInfo").text(info);
+            $("#imageModal").fadeIn(300);
+            $("#imageModal").addClass("active");
+        });
+        
+        $("#modalClose").on("click", function() {
+            $("#imageModal").fadeOut(300);
+            $("#imageModal").removeClass("active");
+        });
+        
+        $(window).on("click", function(e) {
+            if ($(e.target).is("#imageModal")) {
+                $("#imageModal").fadeOut(300);
+                $("#imageModal").removeClass("active");
+            }
+        });
+        
+        // ======================= FUNGSI LAIN =======================
+        if (typeof setActiveLanguage === 'function') setActiveLanguage();
+        if (typeof checkLoginStatus === 'function') checkLoginStatus();
+        if (typeof loadNews === 'function') loadNews();
+        
+        $("#loadMoreBtn").on("click", function() { 
+            if (typeof loadMoreNews === 'function') loadMoreNews(); 
+        });
+        
+        setTimeout(function() { $("#loaderWrapper").fadeOut(500); }, 1000);
+    });
+</script>
+</body>
+</html>
